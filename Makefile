@@ -14,13 +14,14 @@ CC = gcc -g3
 ARFLAGS = -rc
 
 # The flags to use with the C compiler
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra #-Werror
 
 # The command to remove files
 RM = rm -f
 
 # A list of all .c files in the current directory
-SRCS = main.c 
+SRCS = main.c \
+	file_check.c
 
 # A list of all .o files that correspond to the .c files
 OBJS = $(SRCS:.c=.o)

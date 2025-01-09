@@ -3,31 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: darmarti <darmarti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 19:14:02 by darmarti          #+#    #+#             */
-/*   Updated: 2025/01/07 19:29:14 by darmarti         ###   ########.fr       */
+/*   Updated: 2025/01/09 21:15:39 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdbool.h>
-#include "./MLX42/include/MLX42/MLX42.h"
-#include "./libft/libft/libft.h"
-#include "./libft/printf/ft_printf.h"
 #include "so_long.h"
 
-static mlx_image_t* image;
+//static mlx_image_t* image;
+
+// void	init_map_properties(t_map_properties *map_properties)
+// {
+// 	map_properties->spawn = 0;
+// 	map_properties->exit = 0;
+// 	map_properties->objects = 0;
+// 	map_properties->x_size = 0;
+// 	map_properties->y_size = 0;
+// }
 
 int	main(int argc, char **argv)
 {
+	int	fd;
+	t_map_properties map_properties;
+	//init_map_properties(&map_properties);
+	map_properties.exit = 0;
 	if (argc == 2)
 	{
-		
+		fd = open(argv[1], O_RDONLY);
+		check_file_validity(fd, argv[1]);
 	}
 	else
-		ft_printf("Error: No se ha proporcinado un parámetro");
+		show_error_exit("No argument introduced.");
 
 	return (0);
 }

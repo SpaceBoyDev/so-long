@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 19:25:18 by darmarti          #+#    #+#             */
-/*   Updated: 2024/11/17 19:49:32 by dario            ###   ########.fr       */
+/*   Updated: 2025/01/09 18:25:20 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@
 # include <stdio.h>
 
 char	*get_next_line(int fd);
-size_t	ft_strlen(const char *s);
-void	*ft_calloc(size_t nmemb, size_t size);
-char	*ft_strjoin(char *s1, char const *s2);
-char	*ft_strchr(const char *s, int c);
+size_t	strlen_gnl(const char *s);
+void	*calloc_gnl(size_t nmemb, size_t size);
+char	*strjoin_gnl(char *s1, char const *s2);
+char	*strchr_gnl(const char *s, int c);
 
 #endif

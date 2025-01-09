@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 19:25:23 by darmarti          #+#    #+#             */
-/*   Updated: 2024/11/17 21:11:01 by dario            ###   ########.fr       */
+/*   Updated: 2025/01/09 18:26:13 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static char	*ft_cleanline(char *line, char **last_buffer)
 	}
 	while (line[i] != '\n' && line[i])
 		++i;
-	clean_line = (char *)ft_calloc(i + 2, sizeof(char));
+	clean_line = (char *)calloc_gnl(i + 2, sizeof(char));
 	if (!clean_line)
 		return (free(line), NULL);
 	ft_clean(line, clean_line);
@@ -80,13 +80,13 @@ static char	*ft_clean_last_buffer(char *buffer) //DA PROBLEMAS
 
 	if (!buffer)
 		return (NULL);
-	len = ft_strlen(buffer);
+	len = strlen_gnl(buffer);
 	i = 0;
 	while (buffer[i] != '\n' && buffer[i])
 		++i;
 	if (buffer[i] == '\n')
 		++i;
-	new_last_buffer = ft_calloc((len - i + 1), sizeof(char));
+	new_last_buffer = calloc_gnl((len - i + 1), sizeof(char));
 	if (!new_last_buffer)
 		return (NULL);
 	j = 0;
@@ -101,27 +101,27 @@ char	*get_next_line(int fd)
 {
 	static char		*all_lines[1024];
 	char			*line;
-	char			*buffer;
+	char			*buff;
 	int				bytes_read;
 
 	if (!all_lines[fd])
-		all_lines[fd] = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
-	buffer = (char *)ft_calloc(BUFFER_SIZE + 1, sizeof(char));
-	if (fd < 0 || fd > 1024 || BUFFER_SIZE <= 0 || !buffer || !all_lines[fd])
-		return (ft_null(&buffer, &all_lines[fd]));
-	line = ft_strjoin(NULL, all_lines[fd]);
+		all_lines[fd] = calloc_gnl(BUFFER_SIZE + 1, sizeof(char));
+	buff = (char *)calloc_gnl(BUFFER_SIZE + 1, sizeof(char));
+	if (fd < 0 || fd > 1024 || BUFFER_SIZE <= 0 || !buff || !all_lines[fd])
+		return (ft_null(&buff, &all_lines[fd]));
+	line = strjoin_gnl(NULL, all_lines[fd]);
 	bytes_read = 1;
-	while (!ft_strchr(buffer, '\n') && bytes_read > 0 && !ft_strchr(line, '\n'))
+	while (!strchr_gnl(buff, '\n') && bytes_read > 0 && !strchr_gnl(line, '\n'))
 	{
-		bytes_read = read(fd, buffer, BUFFER_SIZE);
+		bytes_read = read(fd, buff, BUFFER_SIZE);
 		if (bytes_read < 0)
-			return (free(line), line = NULL, ft_null(&buffer, &all_lines[fd]));
+			return (free(line), line = NULL, ft_null(&buff, &all_lines[fd]));
 		if (bytes_read == 0)
 			break ;
-		buffer[bytes_read] = '\0';
-		line = ft_strjoin(line, buffer);
-		all_lines[fd] = ft_strjoin(all_lines[fd], buffer);
+		buff[bytes_read] = '\0';
+		line = strjoin_gnl(line, buff);
+		all_lines[fd] = strjoin_gnl(all_lines[fd], buff);
 	}
 	all_lines[fd] = ft_clean_last_buffer(all_lines[fd]);
-	return (line = ft_cleanline(line, &all_lines[fd]), free(buffer), line);
+	return (line = ft_cleanline(line, &all_lines[fd]), free(buff), line);
 }

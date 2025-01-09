@@ -6,13 +6,13 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 19:25:20 by darmarti          #+#    #+#             */
-/*   Updated: 2024/11/17 21:04:07 by dario            ###   ########.fr       */
+/*   Updated: 2025/01/09 18:25:20 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t	ft_strlen(const char *s)
+size_t	strlen_gnl(const char *s)
 {
 	size_t	len;
 
@@ -22,7 +22,7 @@ size_t	ft_strlen(const char *s)
 	return (len);
 }
 
-char	*ft_strchr(const char *s, int c)
+char	*strchr_gnl(const char *s, int c)
 {
 	while (*s)
 	{
@@ -35,7 +35,7 @@ char	*ft_strchr(const char *s, int c)
 	return (NULL);
 }
 
-void	*ft_calloc(size_t nmemb, size_t size)
+void	*calloc_gnl(size_t nmemb, size_t size)
 {
 	void		*ptr;
 	size_t		i;
@@ -61,19 +61,19 @@ void	ft_join(char *dest, const char *src, size_t *i)
 		dest[(*i)++] = src[j++];
 }
 
-char	*ft_strjoin(char *s1, char const *s2)
+char	*strjoin_gnl(char *s1, char const *s2)
 {
 	size_t	i;
 	char	*str;
 
 	i = 0;
 	if (!s1)
-		s1 = ft_calloc(1, sizeof(char));
+		s1 = calloc_gnl(1, sizeof(char));
 	if (!s2)
-		s2 = ft_calloc(1, sizeof(char));
+		s2 = calloc_gnl(1, sizeof(char));
 	if (!s1 || !s2)
 		return (NULL);
-	str = (char *)malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
+	str = malloc((strlen_gnl(s1) + strlen_gnl(s2) + 1) * sizeof(char));
 	if (!str)
 	{
 		free(s1);

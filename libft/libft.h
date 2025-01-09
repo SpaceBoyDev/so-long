@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 19:29:51 by darmarti          #+#    #+#             */
-/*   Updated: 2024/09/30 20:51:32 by dario            ###   ########.fr       */
+/*   Updated: 2025/01/09 19:36:15 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include "printf/ft_printf.h"
+# include "gnl/get_next_line.h"
 
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
