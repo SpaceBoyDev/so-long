@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 19:13:51 by darmarti          #+#    #+#             */
-/*   Updated: 2025/01/09 21:41:46 by dario            ###   ########.fr       */
+/*   Updated: 2025/01/09 21:23:18 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,17 @@
 
 typedef struct s_map_properties
 {
-	bool	has_spawn;
-	bool	has_end;
-	bool	has_object;
-	size_t	max_len;
-	struct s_list	*next;
+	size_t	spawn;
+	size_t	exit;
+	size_t	objects;
+	size_t	x_size;
+	size_t	y_size;
 }					t_map_properties;
 
 
 void	show_error_exit(char *error_message);
-void	check_file_validity(int fd, char *arg);
+void	check_file_validity(int fd, char *arg, t_map_properties *map);
 char	*check_file_extension(char *arg);
-void	check_map_size(int fd);
+void	check_map_size(int fd, t_map_properties *map);
 
 #endif

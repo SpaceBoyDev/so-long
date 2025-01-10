@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 19:14:02 by darmarti          #+#    #+#             */
-/*   Updated: 2025/01/09 21:15:39 by dario            ###   ########.fr       */
+/*   Updated: 2025/01/09 21:24:06 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 //static mlx_image_t* image;
 
-// void	init_map_properties(t_map_properties *map_properties)
-// {
-// 	map_properties->spawn = 0;
-// 	map_properties->exit = 0;
-// 	map_properties->objects = 0;
-// 	map_properties->x_size = 0;
-// 	map_properties->y_size = 0;
-// }
+void	init_map_properties(t_map_properties *map_properties)
+{
+	map_properties->spawn = 0;
+	map_properties->exit = 0;
+	map_properties->objects = 0;
+	map_properties->x_size = 0;
+	map_properties->y_size = 0;
+}
 
 int	main(int argc, char **argv)
 {
@@ -32,7 +32,7 @@ int	main(int argc, char **argv)
 	if (argc == 2)
 	{
 		fd = open(argv[1], O_RDONLY);
-		check_file_validity(fd, argv[1]);
+		check_file_validity(fd, argv[1], &map_properties);
 	}
 	else
 		show_error_exit("No argument introduced.");

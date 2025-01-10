@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 19:47:40 by dario             #+#    #+#             */
-/*   Updated: 2025/01/09 21:08:25 by dario            ###   ########.fr       */
+/*   Updated: 2025/01/10 18:50:55 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 
 void	show_error_exit(char *error_message)
 {
-	ft_printf("ERROR\n-----\n%s\n", error_message);
+	ft_printf("ERROR\n-----\n");
+	if (error_message)
+		ft_printf("%s\n", error_message);
 	exit(0);
 }
 
@@ -45,7 +47,7 @@ void	check_map_size(int fd, t_map_properties *map)
 	size_t	i;
 
 	line = get_next_line(fd);
-	map->x_size = ft_strlen(line);
+	map->x_size = ft_strlen(line) - 1;
 	while (line)
 	{
 		i = 0;
@@ -57,11 +59,12 @@ void	check_map_size(int fd, t_map_properties *map)
 				map->exit++;
 			else if(line[i] == 'C')
 				map->objects++;
-			if (line[i] == '0' || line[i] == '1')
-				++i;
+			else if (line[i] != '0' && line[i] != '1' && line[i] != '\n')
+				show_error_exit("Unrecognized character in map");
+			++i;
 		}
-		if (i != map->x_size)
-			show_error_exit("Map incorrect");
+		if (i - 1 != map->x_size)
+			show_error_exit("Map size incorrect");
 		ft_printf("%s", line);
 		line = get_next_line(fd);
 	}
