@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 19:13:51 by darmarti          #+#    #+#             */
-/*   Updated: 2025/01/09 21:23:18 by dario            ###   ########.fr       */
+/*   Updated: 2025/01/13 19:08:07 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,39 @@
 
 typedef struct s_map_properties
 {
-	size_t	spawn;
-	size_t	exit;
-	size_t	objects;
-	size_t	x_size;
-	size_t	y_size;
+	char	*name;
+	char	**tiles;
+	size_t	num_spawns;
+	size_t	num_exits;
+	size_t	num_objects;
+	size_t	width;
+	size_t	height;
 }					t_map_properties;
 
+typedef struct s_game_vars
+{
+	mlx_t				*mlx;
+	t_map_properties	*map_properties;
+	
+}					t_game_vars;
 
-void	show_error_exit(char *error_message);
+typedef struct s_tile
+{
+	char	character;
+	
+}					t_tile;
+
+// main.c
+void	init_map_properties(t_map_properties *map_properties);
+char	**copy_map(t_map_properties *map, int fd);
+// game_manager.c
+void	start_game(t_game_vars *vars);
+// file_check.c
 void	check_file_validity(int fd, char *arg, t_map_properties *map);
 char	*check_file_extension(char *arg);
-void	check_map_size(int fd, t_map_properties *map);
-
+// map_manager.c
+void	check_map_properties(t_map_properties *map);
+void	check_map(int fd, t_map_properties *map);
+// error_manager.c
+void	error_exit(char *error_message);
 #endif

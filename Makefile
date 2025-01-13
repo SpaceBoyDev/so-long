@@ -21,7 +21,10 @@ RM = rm -f
 
 # A list of all .c files in the current directory
 SRCS = main.c \
-	file_check.c
+	game_manager.c \
+	file_check.c \
+	map_manager.c \
+	error_manager.c \
 
 # A list of all .o files that correspond to the .c files
 OBJS = $(SRCS:.c=.o)
@@ -46,8 +49,8 @@ libmlx:
 	@cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4
 
 # A rule to build the bonus part
-bonus: $(BNS)
-	$(CC) $(CFLAGS) $(BNS) -o $(NAME) $(LIBFT_LIB) $(LDFLAGS) $(LIBS)
+# bonus: $(BNS)
+# 	$(CC) $(CFLAGS) $(BNS) -o $(NAME) $(LIBFT_LIB) $(LDFLAGS) $(LIBS)
 
 # A rule to remove all .o files
 clean:
@@ -66,6 +69,24 @@ re: fclean all
 # A rule to run the program
 run: all
 	./$(NAME) $(MAP)
+
+testmaps: all
+	./$(NAME) ./maps/invalid/change_permissions.ber
+	./$(NAME) /maps/invalid/empty.ber
+	./$(NAME) ./maps/invalid/no_collectibles.ber
+	./$(NAME) ./maps/invalid/no_exit.ber
+	./$(NAME) ./maps/invalid/no_extension
+	./$(NAME) ./maps/invalid/no_path0.ber
+	./$(NAME) ./maps/invalid/no_path1.ber
+	./$(NAME) ./maps/invalid/no_starting_position.ber
+	./$(NAME) ./maps/invalid/not_rectangular0.ber
+	./$(NAME) ./maps/invalid/not_rectangular1.ber
+	./$(NAME) ./maps/invalid/not_surrounded.ber
+	./$(NAME) ./maps/invalid/other_characters.ber
+	./$(NAME) ./maps/invalid/other_extension.txt
+	./$(NAME) ./maps/invalid/two_exits.ber
+	./$(NAME) ./maps/invalid/two_starting_positions.ber
+	./$(NAME) ./maps/map1.ber
 
 # error: all
 # 	@echo
