@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_manager.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
+/*   By: darmarti <darmarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 19:20:31 by dario             #+#    #+#             */
-/*   Updated: 2025/01/13 18:40:21 by dario            ###   ########.fr       */
+/*   Updated: 2025/01/15 19:01:12 by darmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,10 @@ void	check_map_properties(t_map_properties *map)
 		error_exit("There must be at least one object");
 }
 
-void	check_map(int fd, t_map_properties *map)
+void	check_char(char *line, t_map_properties *map, int fd)
 {
-	char	*line;
 	size_t	i;
 
-	line = get_next_line(fd);
-	map->width = ft_strlen(line) - 1;
 	while (line)
 	{
 		i = 0;
@@ -54,6 +51,20 @@ void	check_map(int fd, t_map_properties *map)
 				error_exit("Unrecognized character in map");
 			++i;
 		}
-		line = check_size(map, fd, i);
+		//line = check_size(map, fd, i);
+		if (i != map->width)
+			error_exit("Map size incorrect");
+		line = get_next_line(fd);
 	}
+}
+
+void	check_map(int fd, t_map_properties *map)
+{
+	char	*line;
+
+	line = get_next_line(fd);
+	if (!line)
+		error_exit("Empty map");
+	map->width = ft_strlen(line) - 1;
+	check_char(line, map, fd);
 }
