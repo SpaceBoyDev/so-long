@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
+/*   By: darmarti <darmarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 19:14:02 by darmarti          #+#    #+#             */
-/*   Updated: 2025/01/13 19:07:46 by dario            ###   ########.fr       */
+/*   Updated: 2025/01/15 18:09:09 by darmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
 
 int	main(int argc, char **argv)
 {
@@ -68,7 +67,7 @@ void	fill_map(int fd, t_map_properties *map)
 char	**copy_map(t_map_properties *map, int fd)
 {
 	size_t	i;
-	
+
 	i = 0;
 	map->tiles = (char **)ft_calloc(sizeof(char *), map->height + 1);
 	if (!map->tiles)
