@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 19:13:51 by darmarti          #+#    #+#             */
-/*   Updated: 2025/01/16 19:45:52 by dario            ###   ########.fr       */
+/*   Updated: 2025/01/16 20:24:50 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,11 @@ typedef struct s_game_vars
 	mlx_t				*mlx;
 	t_map_properties	*map_properties;
 	t_flood_fill_data	*flood_data;
-	
 }					t_game_vars;
 
 typedef struct s_tile
 {
 	char	character;
-	
 }					t_tile;
 
 // main.c

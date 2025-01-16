@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 19:20:31 by dario             #+#    #+#             */
-/*   Updated: 2025/01/16 19:45:28 by dario            ###   ########.fr       */
+/*   Updated: 2025/01/16 20:24:21 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	check_char(char *line, t_map_properties *map, int fd)
 		while (line[i])
 		{
 			if (line[i] == '\n')
-				break;
+				break ;
 			if (line[i] == 'P')
 				map->num_spawns++;
 			else if (line[i] == 'E')
@@ -78,7 +78,6 @@ void	check_char(char *line, t_map_properties *map, int fd)
 				error_exit("Unrecognized character in map");
 			++i;
 		}
-		//line = check_size(map, fd, i);
 		if (i != map->width)
 			error_exit("Map size incorrect");
 		line = get_next_line(fd);

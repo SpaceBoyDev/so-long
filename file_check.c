@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 19:47:40 by dario             #+#    #+#             */
-/*   Updated: 2025/01/12 19:53:06 by dario            ###   ########.fr       */
+/*   Updated: 2025/01/16 20:23:31 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,3 @@ char	*check_file_extension(char *arg)
 		error_exit("Map file extension must be .ber");
 	return (arg);
 }
-
-
