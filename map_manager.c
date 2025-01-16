@@ -3,14 +3,41 @@
 /*                                                        :::      ::::::::   */
 /*   map_manager.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: darmarti <darmarti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 19:20:31 by dario             #+#    #+#             */
-/*   Updated: 2025/01/15 19:01:12 by darmarti         ###   ########.fr       */
+/*   Updated: 2025/01/16 19:45:28 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+void	check_walls(t_map_properties *map)
+{
+	size_t	i;
+
+	i = 0;
+	while (map->tiles[0][i] && i < map->width)
+	{
+		if (map->tiles[0][i] != '1')
+			error_exit("Upper wall incomplete");
+		++i;
+	}
+	i = 0;
+	while (map->tiles[i] && i < map->height)
+	{
+		if (map->tiles[i][0] != '1' || map->tiles[i][map->width - 1] != '1')
+			error_exit("There must be a wall surrounding the map");
+		++i;
+	}
+	i = 0;
+	while (map->tiles[map->height - 1][i] && i < map->width)
+	{
+		if (map->tiles[map->height - 1][i] != '1')
+			error_exit("Lower wall incomplete");
+		++i;
+	}
+}
 
 char	*check_size(t_map_properties *map, int fd, size_t i)
 {

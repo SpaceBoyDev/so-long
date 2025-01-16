@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: darmarti <darmarti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 19:14:02 by darmarti          #+#    #+#             */
-/*   Updated: 2025/01/15 19:03:14 by darmarti         ###   ########.fr       */
+/*   Updated: 2025/01/16 19:45:57 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@ int	main(int argc, char **argv)
 		fd = open(argv[1], O_RDONLY);
 		check_file_validity(fd, argv[1], &map_properties);
 		copy_map(&map_properties, fd);
+		ft_printf("\nHeight -> %i\n", map_properties.height);
+		ft_printf("Width  -> %i\n", map_properties.width);
+		check_walls(&map_properties);
 		//start_game(&map_properties);
 	}
 	else
@@ -79,6 +82,7 @@ char	**copy_map(t_map_properties *map, int fd)
 			return (NULL);
 		++i;
 	}
+	map->tiles[map->height + 1] = ft_calloc(sizeof(char), map->width + 1);
 	close(fd);
 	fd = open(map->name, O_RDONLY);
 	fill_map(fd, map);
