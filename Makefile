@@ -63,7 +63,7 @@ re: fclean all
 run: all
 	./$(NAME) $(MAP)
 
-testmaps: all
+testmaps:
 	./$(NAME) ./maps/invalid/change_permissions.ber
 	./$(NAME) ./maps/invalid/empty.ber
 	./$(NAME) ./maps/invalid/no_collectibles.ber
