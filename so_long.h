@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 19:13:51 by darmarti          #+#    #+#             */
-/*   Updated: 2025/01/16 20:24:50 by dario            ###   ########.fr       */
+/*   Updated: 2025/01/17 16:48:07 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ typedef struct s_map_properties
 {
 	char	*name;
 	char	**tiles;
-	size_t	player_x;
-	size_t	player_y;
+	size_t	spawn_x;
+	size_t	spawn_y;
 	size_t	num_spawns;
 	size_t	num_exits;
 	size_t	num_objects;
@@ -52,7 +52,8 @@ typedef struct s_tile
 
 // main.c
 void	init_map_properties(t_map_properties *map_properties);
-char	**copy_map(t_map_properties *map, int fd);
+char	**save_map(t_map_properties *map, int fd);
+char	**copy_map(char **map);
 
 // game_manager.c
 void	start_game(t_game_vars *vars);
@@ -65,6 +66,9 @@ void	check_walls(t_map_properties *map);
 // map_manager.c
 void	check_map_properties(t_map_properties *map);
 void	check_map(int fd, t_map_properties *map);
+
+// flood_fill.c
+void	flood_fill(char **map, t_flood_fill_data *data, int x, int y);
 
 // error_manager.c
 void	error_exit(char *error_message);

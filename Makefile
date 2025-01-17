@@ -19,7 +19,7 @@ INVALID_MAPS = maps/invalid/change_permissions.ber maps/invalid/empty.ber maps/i
 	maps/invalid/two_starting_positions.ber
 
 # A list of all .c files in the current directory
-SRCS = main.c game_manager.c file_check.c map_manager.c error_manager.c
+SRCS = main.c game_manager.c file_check.c map_manager.c error_manager.c flood_fill.c
 # A list of all .o files that correspond to the .c files
 OBJS = $(SRCS:.c=.o)
 HDERS = so_long.h
