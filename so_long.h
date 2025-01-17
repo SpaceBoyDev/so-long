@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 19:13:51 by darmarti          #+#    #+#             */
-/*   Updated: 2025/01/17 16:48:07 by dario            ###   ########.fr       */
+/*   Updated: 2025/01/17 16:17:17 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,7 @@ typedef struct s_tile
 }					t_tile;
 
 // main.c
-void	init_map_properties(t_map_properties *map_properties);
-char	**save_map(t_map_properties *map, int fd);
-char	**copy_map(char **map);
-
+void	init_struct_properties(t_map_properties *map, t_flood_fill_data *data);
 // game_manager.c
 void	start_game(t_game_vars *vars);
 
@@ -63,9 +60,14 @@ void	check_file_validity(int fd, char *arg, t_map_properties *map);
 char	*check_file_extension(char *arg);
 void	check_walls(t_map_properties *map);
 
-// map_manager.c
+// map_checker.c
 void	check_map_properties(t_map_properties *map);
 void	check_map(int fd, t_map_properties *map);
+
+// map_utils.c
+char	**save_map(t_map_properties *map, int fd);
+void	fill_map(int fd, t_map_properties *map);
+char	**copy_map(char **map);
 
 // flood_fill.c
 void	flood_fill(char **map, t_flood_fill_data *data, int x, int y);
