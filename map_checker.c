@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_manager.c                                      :+:      :+:    :+:   */
+/*   map_checker.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 19:20:31 by dario             #+#    #+#             */
-/*   Updated: 2025/01/16 20:24:21 by dario            ###   ########.fr       */
+/*   Updated: 2025/01/20 21:40:01 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	check_walls(t_map_properties *map)
+void	check_walls(t_map *map)
 {
 	size_t	i;
 
@@ -20,43 +20,44 @@ void	check_walls(t_map_properties *map)
 	while (map->tiles[0][i] && i < map->width)
 	{
 		if (map->tiles[0][i] != '1')
-			error_exit("Upper wall incomplete");
+			error_exit_free("Upper wall incomplete", map);
 		++i;
 	}
 	i = 0;
 	while (map->tiles[i] && i < map->height)
 	{
 		if (map->tiles[i][0] != '1' || map->tiles[i][map->width - 1] != '1')
-			error_exit("There must be a wall surrounding the map");
+			error_exit_free("There must be a wall surrounding the map", map);
 		++i;
 	}
 	i = 0;
 	while (map->tiles[map->height - 1][i] && i < map->width)
 	{
 		if (map->tiles[map->height - 1][i] != '1')
-			error_exit("Lower wall incomplete");
+			error_exit_free("Lower wall incomplete", map);
 		++i;
 	}
 }
 
-char	*check_size(t_map_properties *map, int fd, size_t i)
+char	*check_size(t_map *map, int fd, size_t i, char *line)
 {
+	free(line);
 	if (i != map->width)
-		error_exit("Map size incorrect");
+		return (error_exit("Map size incorrect"));
 	return (get_next_line(fd));
 }
 
-void	check_map_properties(t_map_properties *map)
+void	check_map_properties(t_map *map)
 {
 	if (map->num_spawns != 1)
-		error_exit("There must be only one spawn point");
+		error_exit_free("There must be only one spawn point", map);
 	else if (map->num_exits != 1)
-		error_exit("There must be only one exit");
+		error_exit_free("There must be only one exit", map);
 	else if (map->num_objects < 1)
-		error_exit("There must be at least one object");
+		error_exit_free("There must be at least one object", map);
 }
 
-void	check_char(char *line, t_map_properties *map, int fd)
+char	*check_char(char *line, t_map *map, int fd)
 {
 	size_t	i;
 
@@ -75,22 +76,21 @@ void	check_char(char *line, t_map_properties *map, int fd)
 			else if (line[i] == 'C')
 				map->num_objects++;
 			else if (line[i] != '0' && line[i] != '1')
-				error_exit("Unrecognized character in map");
+				return (free(line), error_exit("Unrecognized character"));
 			++i;
 		}
-		if (i != map->width)
-			error_exit("Map size incorrect");
-		line = get_next_line(fd);
+		line = check_size(map, fd, i, line);
 	}
+	return (0);
 }
 
-void	check_map(int fd, t_map_properties *map)
+void	check_map(int fd, t_map *map)
 {
 	char	*line;
 
 	line = get_next_line(fd);
 	if (!line)
-		error_exit("Empty map");
+		error_exit("The map is empty");
 	map->width = ft_strlen(line) - 1;
 	check_char(line, map, fd);
 }
