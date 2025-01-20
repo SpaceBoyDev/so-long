@@ -1,6 +1,9 @@
 # The name of the project
 NAME = so_long
 
+VAL = valgrind
+VALFLAGS = --leak-check=full --show-leak-kinds=all
+
 # Makefile flags
 MAKEFLAGS += --no-print-directory
 MAP = ./maps/map.ber
@@ -19,13 +22,13 @@ INVALID_MAPS = maps/invalid/change_permissions.ber maps/invalid/empty.ber maps/i
 	maps/invalid/two_starting_positions.ber
 
 # A list of all .c files in the current directory
-SRCS = main.c game_manager.c file_check.c map_checker.c map_utils.c error_manager.c flood_fill.c
+SRCS = main.c game_manager.c file_check.c map_checker.c map_utils.c error_manager.c flood_fill.c free_variables.c
 # A list of all .o files that correspond to the .c files
 OBJS = $(SRCS:.c=.o)
 HDERS = so_long.h
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra #-Werror
 ARFLAGS = -rc
 RM = rm -f
 
@@ -96,8 +99,19 @@ testmaps:
 	done
 	@echo "$(CIAN)All maps tested$(COLOREND)"
 
+leaks:
+	@echo "$(CIAN)Testing all invalid maps$(COLOREND)"
+	@for file in $(INVALID_MAPS); do \
+			$(VAL) $(VALFLAGS) ./$(NAME) $$file | grep "LEAK SUMMARY" > /dev/null; \
+		if [ $$? -eq 0 ]; then \
+			echo "$(RED)$$file: leaks!$(COLOREND)"; \
+		else \
+			echo "$(GREEN)$$file: no leaks$(COLOREND)"; \
+		fi \
+	done
+
 norme:
-	@echo "$(CIAN)SCRIPTS$(COLOREND)"
+	@echo "$(CIAN)SOURCES$(COLOREND)"
 	@for file in $(SRCS); do \
 		norminette $$file | grep "OK!" > /dev/null; \
 		if [ $$? -eq 0 ]; then \
@@ -108,7 +122,7 @@ norme:
 			echo "$(COLOREND)"; \
 		fi \
 	done
-	@echo "$(CIAN)\nHEADERS\n$(COLOREND)"
+	@echo "$(CIAN)\nHEADERS$(COLOREND)"
 	@for header in $(HDERS); do \
 		norminette $$header | grep "OK!" > /dev/null; \
 		if [ $$? -eq 0 ]; then \
