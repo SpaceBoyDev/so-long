@@ -28,7 +28,7 @@ OBJS = $(SRCS:.c=.o)
 HDERS = so_long.h
 
 CC = cc
-CFLAGS = -Wall -Wextra #-Werror
+CFLAGS = -Wall -Wextra -D SCALE=3#-Werror
 ARFLAGS = -rc
 RM = rm -f
 

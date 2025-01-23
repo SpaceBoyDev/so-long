@@ -6,11 +6,20 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 18:46:45 by dario             #+#    #+#             */
-/*   Updated: 2025/01/20 21:15:38 by dario            ###   ########.fr       */
+/*   Updated: 2025/01/23 19:22:19 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+char	*free_vars(t_vars *vars)
+{
+	// mlx_terminate(vars->mlx);
+	// free(vars->mlx);
+	free_map_struct(vars->map_properties);
+	//free(vars->map_properties);
+	return (NULL);
+}
 
 char	*free_map_struct(t_map *map)
 {
@@ -27,7 +36,6 @@ char	*free_map_struct(t_map *map)
 	free(map->tiles);
 	return (NULL);
 }
-
 
 char	*free_map(char **map)
 {

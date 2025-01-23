@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 19:14:02 by darmarti          #+#    #+#             */
-/*   Updated: 2025/01/20 21:25:48 by dario            ###   ########.fr       */
+/*   Updated: 2025/01/23 19:21:26 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,21 +43,21 @@ int	main(int argc, char **argv)
 	{
 		fd = open(argv[1], O_RDONLY);
 		check_file_validity(fd, argv[1], &map);
-		// if (!save_map(&map, argv[1], fd))
-		// 	error_exit_free("Error saving the map", &map);
-		// check_walls(&map);
-		// map_copy = copy_map(map.tiles, map.height);
-		// flood_fill(map_copy, &flood_data, map.spawn_x, map.spawn_x);
-		// read_tiles(map_copy);
-		// if (flood_data.objects_count != map.num_objects || !flood_data.exit)
-		//  	error_exit("This map is not possible to complete");
-		//start_game(&vars);
+		if (!save_map(&map, argv[1], fd))
+		 	error_exit_free("Error saving the map", &map);
+		check_walls(&map);
+		map_copy = copy_map(map.tiles, map.height);
+		flood_fill(map_copy, &flood_data, map.spawn_x, map.spawn_x);
+		read_tiles(map_copy);
+		if (flood_data.objects_count != map.num_objects || !flood_data.exit)
+		 	error_exit_free("This map is not possible to complete", &map);
+		start_game(&vars);
+		
+		free_map(map_copy);
+		free_vars(&vars);
 	}
 	else
 		error_exit("No argument introduced");
-	// free_map(map_copy);
-	// free_map(map.tiles);
-	//free_map_struct(&map);
 	return (0);
 }
 
