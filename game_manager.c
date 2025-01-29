@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 21:32:09 by dario             #+#    #+#             */
-/*   Updated: 2025/01/23 19:24:31 by dario            ###   ########.fr       */
+/*   Updated: 2025/01/29 13:50:16 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,31 @@ char	*draw_map(mlx_t *mlx, char **map)
 			else if (map[i][j] == '0' || map[i][j] == 'C' || map[i][j] == 'E'
 					|| map[i][j] == 'P')
 				image_to_window(mlx, ground, j, i, 1);
+			++j;
+		}
+		++i;
+	}
+	draw_map_misc(mlx, map);
+	return (NULL);
+}
+
+char	*draw_map_misc(mlx_t *mlx, char **map)
+{
+	size_t	i;
+	size_t	j;
+
+	i = 0;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			if (map[i][j] == 'P')
+				image_to_window(mlx, "./textures/character.png", j, i, 3);
+			else if (map[i][j] == 'C')
+				image_to_window(mlx, "./textures/object.png", j, i, 2);
+			else if (map[i][j] == 'E')
+				image_to_window(mlx, "./textures/hole.png", j, i, 2);
 			++j;
 		}
 		++i;

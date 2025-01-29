@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 19:14:02 by darmarti          #+#    #+#             */
-/*   Updated: 2025/01/23 19:21:26 by dario            ###   ########.fr       */
+/*   Updated: 2025/01/28 21:32:33 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	main(int argc, char **argv)
 		check_walls(&map);
 		map_copy = copy_map(map.tiles, map.height);
 		flood_fill(map_copy, &flood_data, map.spawn_x, map.spawn_x);
-		read_tiles(map_copy);
+		//read_tiles(map_copy);
 		if (flood_data.objects_count != map.num_objects || !flood_data.exit)
 		 	error_exit_free("This map is not possible to complete", &map);
 		start_game(&vars);

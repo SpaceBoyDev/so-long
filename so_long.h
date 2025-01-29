@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 19:13:51 by darmarti          #+#    #+#             */
-/*   Updated: 2025/01/23 19:24:53 by dario            ###   ########.fr       */
+/*   Updated: 2025/01/29 13:43:16 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	init_struct_properties(t_vars *vars, t_map *map, t_flood_data *data);
 // game_manager.c
 void	start_game(t_vars *vars);
 char	*draw_map(mlx_t *mlx, char **map);
-
+char	*draw_map_misc(mlx_t *mlx, char **map);
 // file_check.c
 void	check_file_validity(int fd, char *arg, t_map *map);
 char	*check_file_extension(char *arg);
