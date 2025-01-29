@@ -22,13 +22,14 @@ INVALID_MAPS = maps/invalid/change_permissions.ber maps/invalid/empty.ber maps/i
 	maps/invalid/two_starting_positions.ber
 
 # A list of all .c files in the current directory
-SRCS = main.c game_manager.c file_check.c map_checker.c map_utils.c error_manager.c flood_fill.c free_variables.c
+SRCS = main.c game_manager.c hooks.c file_check.c map_checker.c map_utils.c error_manager.c \
+	player_movement.c image_manager.c flood_fill.c free_variables.c
 # A list of all .o files that correspond to the .c files
 OBJS = $(SRCS:.c=.o)
 HDERS = so_long.h
 
 CC = cc
-CFLAGS = -Wall -Wextra -D SCALE=5#-Werror
+CFLAGS = -Wall -Wextra -D SCALE=7#-Werror
 ARFLAGS = -rc
 RM = rm -f
 

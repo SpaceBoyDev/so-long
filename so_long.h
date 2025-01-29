@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
+/*   By: darmarti <darmarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 19:13:51 by darmarti          #+#    #+#             */
-/*   Updated: 2025/01/29 13:43:16 by dario            ###   ########.fr       */
+/*   Updated: 2025/01/29 19:14:44 by darmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,26 @@ typedef struct s_flood_data
 	bool	exit;
 }					t_flood_data;
 
+typedef struct s_player
+{
+	mlx_image_t		*img;
+	size_t			pos_x;
+	size_t			pos_y;
+	size_t			objects;
+}					t_player;
+
 typedef struct s_vars
 {
 	mlx_t			*mlx;
 	t_map			*map_properties;
 	t_flood_data	*flood_data;
+	//t_player		*player;
 	mlx_image_t		**map_images;
+	mlx_image_t		*player_img;
+	size_t			player_x;
+	size_t			player_y;
+	size_t			player_objects;
+	size_t			movement_count;
 }					t_vars;
 
 typedef struct s_tile
@@ -57,10 +71,23 @@ typedef struct s_tile
 
 // main.c
 void	init_struct_properties(t_vars *vars, t_map *map, t_flood_data *data);
+
 // game_manager.c
 void	start_game(t_vars *vars);
-char	*draw_map(mlx_t *mlx, char **map);
-char	*draw_map_misc(mlx_t *mlx, char **map);
+void	create_player(t_vars *vars, size_t x, size_t y);
+
+// image_manager.c
+mlx_image_t	*image_to_window(mlx_t *mlx, char *file, int x, int y, int depth);
+char	*draw_map(t_vars *vars, char **map);
+char	*draw_map_misc(t_vars *vars, char **map);
+
+// player_movement.c
+void	move_player(t_vars *vars, size_t x, size_t y);
+
+// hooks.c
+void	close_window_hook(void* param);
+void	player_input_hook(mlx_key_data_t keydata, void *param);
+
 // file_check.c
 void	check_file_validity(int fd, char *arg, t_map *map);
 char	*check_file_extension(char *arg);
@@ -74,15 +101,17 @@ void	check_map(int fd, t_map *map);
 char	**save_map(t_map *map, char *name, int fd);
 void	fill_map(int fd, t_map *map);
 char	**copy_map(char **map, int rows);
+
 // flood_fill.c
 void	flood_fill(char **map, t_flood_data *data, int x, int y);
-
-// error_manager.c
-char	*error_exit(char *error_message);
-char	*error_exit_free(char *error_message, t_map *map);
 
 //free_variables.c
 char	*free_vars(t_vars *vars);
 char	*free_map_struct(t_map *map);
 char	*free_map(char **map);
+
+// error_manager.c
+char	*error_exit(char *error_message);
+char	*error_exit_free(char *error_message, t_map *map);
+
 #endif
