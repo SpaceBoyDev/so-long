@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 19:20:31 by dario             #+#    #+#             */
-/*   Updated: 2025/01/20 21:40:01 by dario            ###   ########.fr       */
+/*   Updated: 2025/01/30 19:45:54 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	check_map_properties(t_map *map)
 		error_exit_free("There must be only one spawn point", map);
 	else if (map->num_exits != 1)
 		error_exit_free("There must be only one exit", map);
-	else if (map->num_objects < 1)
+	else if (map->num_objs < 1)
 		error_exit_free("There must be at least one object", map);
 }
 
@@ -74,7 +74,7 @@ char	*check_char(char *line, t_map *map, int fd)
 			else if (line[i] == 'E')
 				map->num_exits++;
 			else if (line[i] == 'C')
-				map->num_objects++;
+				map->num_objs++;
 			else if (line[i] != '0' && line[i] != '1')
 				return (free(line), error_exit("Unrecognized character"));
 			++i;

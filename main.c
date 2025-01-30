@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 19:14:02 by darmarti          #+#    #+#             */
-/*   Updated: 2025/01/28 21:32:33 by dario            ###   ########.fr       */
+/*   Updated: 2025/01/30 19:45:54 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	main(int argc, char **argv)
 		map_copy = copy_map(map.tiles, map.height);
 		flood_fill(map_copy, &flood_data, map.spawn_x, map.spawn_x);
 		//read_tiles(map_copy);
-		if (flood_data.objects_count != map.num_objects || !flood_data.exit)
+		if (flood_data.objects_count != map.num_objs || !flood_data.exit)
 		 	error_exit_free("This map is not possible to complete", &map);
 		start_game(&vars);
 		
@@ -58,16 +58,17 @@ int	main(int argc, char **argv)
 	}
 	else
 		error_exit("No argument introduced");
+	ft_printf("que me mueroo....");
 	return (0);
 }
 
 void	init_struct_properties(t_vars *vars, t_map *map, t_flood_data *data)
 {
-	vars->map_properties = map;
+	vars->map = map;
 	vars->flood_data = data;
 	map->num_spawns = 0;
 	map->num_exits = 0;
-	map->num_objects = 0;
+	map->num_objs = 0;
 	map->width = 0;
 	map->height = 0;
 	map->tiles = NULL;

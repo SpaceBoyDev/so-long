@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: darmarti <darmarti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 19:13:51 by darmarti          #+#    #+#             */
-/*   Updated: 2025/01/29 19:14:44 by darmarti         ###   ########.fr       */
+/*   Updated: 2025/01/30 19:46:00 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,11 @@ typedef struct s_map
 	char	**tiles;
 	size_t	spawn_x;
 	size_t	spawn_y;
+	size_t	end_x;
+	size_t	end_y;
 	size_t	num_spawns;
 	size_t	num_exits;
-	size_t	num_objects;
+	size_t	num_objs;
 	size_t	width;
 	size_t	height;
 }					t_map;
@@ -41,26 +43,17 @@ typedef struct s_flood_data
 	bool	exit;
 }					t_flood_data;
 
-typedef struct s_player
-{
-	mlx_image_t		*img;
-	size_t			pos_x;
-	size_t			pos_y;
-	size_t			objects;
-}					t_player;
-
 typedef struct s_vars
 {
 	mlx_t			*mlx;
-	t_map			*map_properties;
+	t_map			*map;
 	t_flood_data	*flood_data;
-	//t_player		*player;
 	mlx_image_t		**map_images;
+	size_t			movement_count;
 	mlx_image_t		*player_img;
 	size_t			player_x;
 	size_t			player_y;
-	size_t			player_objects;
-	size_t			movement_count;
+	size_t			player_objs;
 }					t_vars;
 
 typedef struct s_tile
@@ -75,6 +68,8 @@ void	init_struct_properties(t_vars *vars, t_map *map, t_flood_data *data);
 // game_manager.c
 void	start_game(t_vars *vars);
 void	create_player(t_vars *vars, size_t x, size_t y);
+void	collect_object(t_vars *vars, size_t x, size_t y);
+void	end_game(t_vars *vars);
 
 // image_manager.c
 mlx_image_t	*image_to_window(mlx_t *mlx, char *file, int x, int y, int depth);
