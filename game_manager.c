@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 21:32:09 by dario             #+#    #+#             */
-/*   Updated: 2025/01/30 19:54:57 by dario            ###   ########.fr       */
+/*   Updated: 2025/01/31 09:54:10 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,28 +32,28 @@ void	create_player(t_vars *vars, size_t x, size_t y)
 	char	*file;
 
 	file = "./textures/character.png";
-	vars->player_img = image_to_window(vars->mlx, file, x, y, 3);
+	vars->player_img = image_to_window(vars->mlx, file, (t_vector){x, y}, 3);
 	vars->player_x = x;
 	vars->player_y = y;
 	vars->player_objs = 0;
 	vars->movement_count = 0;
 }
 
-void	collect_object(t_vars *vars, size_t x, size_t y)
+void	collect_object(t_vars *vars, t_map *map, size_t x, size_t y)
 {
 	char	*end;
 
 	end = "./textures/hole_ladder.png";
 	++vars->player_objs;
 	vars->map->tiles[y][x] = '0';
-	image_to_window(vars->mlx,  "./textures/ground.png", x, y, 2);
+	image_to_window(vars->mlx, "./textures/ground.png", (t_vector){x, y}, 2);
 	ft_printf("Object collected!!\n");
 	ft_printf("You got %i/%i objects", vars->player_objs, vars->map->num_objs);
 	ft_printf("\n");
 	if (vars->player_objs >= vars->map->num_objs)
 	{
 		ft_printf("All objects collected!!\n");
-		image_to_window(vars->mlx, end, vars->map->end_x, vars->map->end_y, 2);
+		image_to_window(vars->mlx, end, (t_vector){map->end_x, map->end_y}, 2);
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 19:13:51 by darmarti          #+#    #+#             */
-/*   Updated: 2025/01/30 19:46:00 by dario            ###   ########.fr       */
+/*   Updated: 2025/01/31 09:53:41 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,51 +62,56 @@ typedef struct s_tile
 	mlx_image_t	*image;
 }					t_tile;
 
+typedef struct s_vector
+{
+	size_t		x;
+	size_t		y;
+}					t_vector;
+
 // main.c
-void	init_struct_properties(t_vars *vars, t_map *map, t_flood_data *data);
+void		init_structs(t_vars *vars, t_map *map, t_flood_data *data);
 
 // game_manager.c
-void	start_game(t_vars *vars);
-void	create_player(t_vars *vars, size_t x, size_t y);
-void	collect_object(t_vars *vars, size_t x, size_t y);
-void	end_game(t_vars *vars);
+void		start_game(t_vars *vars);
+void		create_player(t_vars *vars, size_t x, size_t y);
+void		collect_object(t_vars *vars, t_map *map, size_t x, size_t y);
+void		end_game(t_vars *vars);
 
 // image_manager.c
-mlx_image_t	*image_to_window(mlx_t *mlx, char *file, int x, int y, int depth);
-char	*draw_map(t_vars *vars, char **map);
-char	*draw_map_misc(t_vars *vars, char **map);
-
+mlx_image_t	*image_to_window(mlx_t *mlx, char *file, t_vector pos, int depth);
+char		*draw_map(t_vars *vars, char **map);
+char		*draw_map_misc(t_vars *vars, char **map, char *obj, char *hole);
 // player_movement.c
-void	move_player(t_vars *vars, size_t x, size_t y);
+void		move_player(t_vars *vars, size_t x, size_t y);
 
 // hooks.c
-void	close_window_hook(void* param);
-void	player_input_hook(mlx_key_data_t keydata, void *param);
+void		close_window_hook(void *param);
+void		player_input_hook(mlx_key_data_t keydata, void *param);
 
 // file_check.c
-void	check_file_validity(int fd, char *arg, t_map *map);
-char	*check_file_extension(char *arg);
-void	check_walls(t_map *map);
+void		check_file_validity(int fd, char *arg, t_map *map);
+char		*check_file_extension(char *arg);
+void		check_walls(t_map *map);
 
 // map_checker.c
-void	check_map_properties(t_map *map);
-void	check_map(int fd, t_map *map);
+void		check_map_properties(t_map *map);
+void		check_map(int fd, t_map *map);
 
 // map_utils.c
-char	**save_map(t_map *map, char *name, int fd);
-void	fill_map(int fd, t_map *map);
-char	**copy_map(char **map, int rows);
+char		**save_map(t_map *map, char *name, int fd);
+void		fill_map(int fd, t_map *map);
+char		**copy_map(char **map, int rows);
 
 // flood_fill.c
-void	flood_fill(char **map, t_flood_data *data, int x, int y);
+void		flood_fill(char **map, t_flood_data *data, int x, int y);
 
 //free_variables.c
-char	*free_vars(t_vars *vars);
-char	*free_map_struct(t_map *map);
-char	*free_map(char **map);
+char		*free_vars(t_vars *vars);
+char		*free_map_struct(t_map *map);
+char		*free_map(char **map);
 
 // error_manager.c
-char	*error_exit(char *error_message);
-char	*error_exit_free(char *error_message, t_map *map);
+char		*error_exit(char *error_message);
+char		*error_exit_free(char *error_message, t_map *map);
 
 #endif

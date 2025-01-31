@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 19:47:40 by dario             #+#    #+#             */
-/*   Updated: 2025/01/23 17:05:48 by dario            ###   ########.fr       */
+/*   Updated: 2025/01/31 09:52:06 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,6 @@ void	check_file_validity(int fd, char *arg, t_map *map)
 		error_exit("File could not be opened");
 	if (!check_file_extension(arg))
 		error_exit("Map file extension must be .ber");
-	// map->name = ft_strdup(arg);
-	// if (!map->name)
-	// 	error_exit_free("File check failed", map);
 	check_map(fd, map);
 	check_map_properties(map);
 }
