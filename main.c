@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 19:14:02 by darmarti          #+#    #+#             */
-/*   Updated: 2025/01/31 09:00:39 by dario            ###   ########.fr       */
+/*   Updated: 2025/01/31 09:13:24 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,15 @@ int	main(int argc, char **argv)
 		read_tiles(map.tiles);
 		check_walls(&map);
 		map_copy = copy_map(map.tiles, map.height);
-		flood_fill(map_copy, &flood_data, map.spawn_x, map.spawn_x);
+		flood_fill(map_copy, &flood_data, map.spawn_x, map.spawn_y);
 		read_tiles(map_copy);
-		if (flood_data.objects_count != map.num_objs || !flood_data.exit)
-		 	error_exit_free("This map is not possible to complete", &map);
+		if (flood_data.objects_count != map.num_objs)
+		{
+			ft_printf("Objectos encontrados -> %i", flood_data.objects_count);
+			error_exit_free("No encuentro todos los objetos", &map);
+		}
+		if (!flood_data.exit)
+		 	error_exit_free("No encuentro el final", &map);
 		start_game(&vars);
 		free_map(map_copy);
 		free_vars(&vars);
