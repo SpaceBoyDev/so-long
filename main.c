@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 19:14:02 by darmarti          #+#    #+#             */
-/*   Updated: 2025/01/30 19:45:54 by dario            ###   ########.fr       */
+/*   Updated: 2025/01/31 09:00:39 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	read_tiles(char **tiles)
 			ft_printf("%c", tiles[i][j]);
 			++j;
 		}
+		ft_printf("\n");
 		++i;
 	}
 }
@@ -45,14 +46,14 @@ int	main(int argc, char **argv)
 		check_file_validity(fd, argv[1], &map);
 		if (!save_map(&map, argv[1], fd))
 		 	error_exit_free("Error saving the map", &map);
+		read_tiles(map.tiles);
 		check_walls(&map);
 		map_copy = copy_map(map.tiles, map.height);
 		flood_fill(map_copy, &flood_data, map.spawn_x, map.spawn_x);
-		//read_tiles(map_copy);
+		read_tiles(map_copy);
 		if (flood_data.objects_count != map.num_objs || !flood_data.exit)
 		 	error_exit_free("This map is not possible to complete", &map);
 		start_game(&vars);
-		
 		free_map(map_copy);
 		free_vars(&vars);
 	}

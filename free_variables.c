@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 18:46:45 by dario             #+#    #+#             */
-/*   Updated: 2025/01/30 19:30:26 by dario            ###   ########.fr       */
+/*   Updated: 2025/01/30 21:10:56 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,8 @@ char	*free_vars(t_vars *vars)
 
 char	*free_map_struct(t_map *map)
 {
-	int	i;
-
-	if (!map->tiles)
-		return (NULL);
-	i = 0;
-	while (map->tiles[i])
-	{
-		free(map->tiles[i]);
-		i++;
-	}
-	free(map->tiles);
+	free_map(map->tiles);
+	map->tiles = NULL;
 	return (NULL);
 }
 
@@ -50,5 +41,6 @@ char	*free_map(char **map)
 		i++;
 	}
 	free(map);
+	map = NULL;
 	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 16:11:43 by dario             #+#    #+#             */
-/*   Updated: 2025/01/29 13:48:05 by dario            ###   ########.fr       */
+/*   Updated: 2025/01/31 08:53:18 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	fill_map(int fd, t_map *map)
 	while (line)
 	{
 		j = 0;
-		while (line[j])
+		while (line[j] && j < map->width)
 		{
 			map->tiles[i][j] = line [j];
 			if (map->tiles[i][j] == 'P')
