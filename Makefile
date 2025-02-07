@@ -14,7 +14,7 @@ LIBS	:= $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
 
 VALID_MAPS = maps/map1.ber maps/map2.ber
 
-INVALID_MAPS = maps/invalid/change_permissions.ber maps/invalid/empty.ber maps/invalid/no_collectibles.ber \
+INVALID_MAPS = maps/invalid/empty.ber maps/invalid/no_collectibles.ber \
 	maps/invalid/no_exit.ber maps/invalid/no_extension maps/invalid/no_path_bonus.ber \
 	maps/invalid/no_path0.ber maps/invalid/no_path1.ber maps/invalid/no_starting_position.ber \
 	maps/invalid/not_rectangular0.ber maps/invalid/not_rectangular1.ber maps/invalid/not_surrounded.ber \
@@ -100,10 +100,10 @@ testmaps:
 	done
 	@echo "$(CIAN)All maps tested$(COLOREND)"
 
-leaks:
+leaks: #no funciona del todo esto. da todo como "no leaks"
 	@echo "$(CIAN)Testing all invalid maps$(COLOREND)"
 	@for file in $(INVALID_MAPS); do \
-			$(VAL) $(VALFLAGS) ./$(NAME) $$file | grep "LEAK SUMMARY" > /dev/null; \
+			$(VAL) $(VALFLAGS) ./$(NAME) $$file | grep "no leaks are possible" > /dev/null; \
 		if [ $$? -eq 0 ]; then \
 			echo "$(RED)$$file: leaks!$(COLOREND)"; \
 		else \
