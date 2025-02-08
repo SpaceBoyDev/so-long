@@ -1,5 +1,6 @@
 # The name of the project
 NAME = so_long
+SCALE = 6
 
 VAL = valgrind
 VALFLAGS = --leak-check=full --show-leak-kinds=all
@@ -29,7 +30,7 @@ OBJS = $(SRCS:.c=.o)
 HDERS = so_long.h
 
 CC = cc
-CFLAGS = -Wall -Wextra -D SCALE=4#-Werror
+CFLAGS = -Wall -Wextra -D SCALE=$(SCALE)#-Werror
 ARFLAGS = -rc
 RM = rm -f
 
@@ -45,7 +46,7 @@ all: $(NAME)
 
 # A rule to build the project from the .o files
 $(NAME): $(LIBFT_LIB) libmlx $(OBJS)
-	@echo "$(CIAN)Compiling so_long...$(BLUE)"
+	@echo "$(CIAN)Compiling so_long at scale $(SCALE)...$(BLUE)"
 	$(CC) $(CFLAGS) $(OBJS) $(LIBS) -o $(NAME) $(LIBFT_LIB)
 
 %.o: %.c
