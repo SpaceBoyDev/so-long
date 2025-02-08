@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 19:13:51 by darmarti          #+#    #+#             */
-/*   Updated: 2025/02/07 21:27:19 by dario            ###   ########.fr       */
+/*   Updated: 2025/02/08 20:27:50 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,7 @@ void		init_structs(t_vars *vars, t_map *map, t_flood_data *data);
 void		start_game(t_vars *vars);
 void		create_player(t_vars *vars, size_t x, size_t y);
 void		collect_object(t_vars *vars, t_map *map, size_t x, size_t y);
-void		end_game(t_vars *vars);
-
+void		end_game(t_vars *vars, bool has_won);
 // image_manager.c
 mlx_image_t	*image_to_window(mlx_t *mlx, char *file, t_vector pos, int depth);
 char		*draw_map(t_vars *vars, char **map);

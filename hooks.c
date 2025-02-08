@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 17:25:20 by darmarti          #+#    #+#             */
-/*   Updated: 2025/01/31 09:52:23 by dario            ###   ########.fr       */
+/*   Updated: 2025/02/08 20:30:04 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	close_window_hook(void *param)
 
 	vars = (t_vars *)param;
 	if (mlx_is_key_down(vars->mlx, MLX_KEY_ESCAPE))
-		mlx_close_window(vars->mlx);
+		end_game(vars, false);
 }
 
 void	player_input_hook(mlx_key_data_t keydata, void *param)

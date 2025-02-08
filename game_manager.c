@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 21:32:09 by dario             #+#    #+#             */
-/*   Updated: 2025/02/08 20:12:07 by dario            ###   ########.fr       */
+/*   Updated: 2025/02/08 20:29:30 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,11 @@ void	collect_object(t_vars *vars, t_map *map, size_t x, size_t y)
 	}
 }
 
-void	end_game(t_vars *vars)
+void	end_game(t_vars *vars, bool has_won)
 {
-	ft_printf("----------\nYou Win!!\n----------\n");
+	if (has_won)
+		ft_printf("\033[1;32m""----------\nYou Win!!\n----------\n""\033[0m");
+	mlx_close_window(vars->mlx);
 	free_vars(vars);
 	mlx_terminate(vars->mlx);
 	exit (0);
