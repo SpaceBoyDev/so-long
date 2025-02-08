@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 18:46:45 by dario             #+#    #+#             */
-/*   Updated: 2025/01/31 09:46:31 by dario            ###   ########.fr       */
+/*   Updated: 2025/02/08 20:17:16 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 char	*free_vars(t_vars *vars)
 {
+	mlx_delete_image(vars->mlx, vars->player_img);
 	free_map_struct(vars->map);
 	return (NULL);
 }
