@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_checker.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
+/*   By: darmarti <darmarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 19:20:31 by dario             #+#    #+#             */
-/*   Updated: 2025/02/10 21:51:12 by dario            ###   ########.fr       */
+/*   Updated: 2025/02/17 19:41:54 by darmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,11 @@ void	check_walls(t_map *map)
 
 char	*check_size(t_map *map, int fd, size_t i, char *line)
 {
-	free(line);
+	if (line)
+		free(line);
 	if (i != map->width)
 		return (error_exit("Map size incorrect"));
-	line = get_next_line(fd);
-	if (!line)
-		error_exit("lol");
-	return (line);
+	return (get_next_line(fd));
 }
 
 void	check_map_properties(t_map *map)
@@ -90,8 +88,11 @@ void	check_char(char *line, t_map *map, int fd)
 				map->num_objs++;
 			else if (line[i] != '0' && line[i] != '1')
 			{
-				free_map_struct(map);
-				read_addr(line);
+				while (line)
+				{
+					free(line);
+					line = get_next_line(fd);
+				}
 				free(line);
 				line = NULL;
 				error_exit("Unrecognized character");

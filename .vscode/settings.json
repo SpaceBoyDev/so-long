@@ -1,8 +1,9 @@
 {
-    "cmake.ignoreCMakeListsMissing": true,
-    "files.associations": {
-        "so_long.h": "c",
-        "ft_printf.h": "c",
-        "libft.h": "c"
-    }
+  "cmake.ignoreCMakeListsMissing": true,
+  "files.associations": {
+    "so_long.h": "c",
+    "ft_printf.h": "c",
+    "libft.h": "c"
+  },
+  "C_Cpp_Runner.msvcBatchPath": ""
 }
