@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 19:13:51 by darmarti          #+#    #+#             */
-/*   Updated: 2025/02/08 20:27:50 by dario            ###   ########.fr       */
+/*   Updated: 2025/02/12 19:51:20 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,19 +48,12 @@ typedef struct s_vars
 	mlx_t			*mlx;
 	t_map			*map;
 	t_flood_data	*flood_data;
-	mlx_image_t		**map_images;
 	size_t			movement_count;
 	mlx_image_t		*player_img;
 	size_t			player_x;
 	size_t			player_y;
 	size_t			player_objs;
 }					t_vars;
-
-typedef struct s_tile
-{
-	char		character;
-	mlx_image_t	*image;
-}					t_tile;
 
 typedef struct s_vector
 {

@@ -30,7 +30,7 @@ OBJS = $(SRCS:.c=.o)
 HDERS = so_long.h
 
 CC = cc
-CFLAGS = -Wall -Wextra -D SCALE=$(SCALE)#-Werror
+CFLAGS = -Wall -Wextra -Werror -g3 -D SCALE=$(SCALE)
 ARFLAGS = -rc
 RM = rm -f
 

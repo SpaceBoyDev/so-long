@@ -6,23 +6,23 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 17:54:51 by darmarti          #+#    #+#             */
-/*   Updated: 2025/02/08 20:49:47 by dario            ###   ########.fr       */
+/*   Updated: 2025/02/10 21:28:00 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	player_anim(t_vars *vars, int delta_x, int delta_y)
-{
-	mlx_texture_t	*texture;
-	int				scale_multi;
+// void	player_anim(t_vars *vars, int delta_x, int delta_y)
+// {
+// 	mlx_texture_t	*texture;
+// 	int				scale_multi;
 
-	scale_multi = 16 * SCALE;
-	texture = mlx_load_png("textures/character_left.png");
-	if (!texture)
-		return (NULL);
-	vars->player_img = mlx_texture_to_image(vars->mlx, texture);
-}
+// 	scale_multi = 16 * SCALE;
+// 	texture = mlx_load_png("textures/character_left.png");
+// 	if (!texture)
+// 		return (NULL);
+// 	vars->player_img = mlx_texture_to_image(vars->mlx, texture);
+// }
 
 
 void	move_player(t_vars *vars, size_t x, size_t y)

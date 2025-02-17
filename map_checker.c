@@ -6,11 +6,21 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 19:20:31 by dario             #+#    #+#             */
-/*   Updated: 2025/02/10 20:54:58 by dario            ###   ########.fr       */
+/*   Updated: 2025/02/10 21:51:12 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+void	read_addr(char *string)
+{
+	int i = 0;
+	while (string[i])
+	{
+		ft_printf("\nDirección de %c es %p\n", string[i], &string[i]);
+		++i;
+	}
+}
 
 void	check_walls(t_map *map)
 {
@@ -41,11 +51,13 @@ void	check_walls(t_map *map)
 
 char	*check_size(t_map *map, int fd, size_t i, char *line)
 {
-	// if (line)
-	// 	free(line);
+	free(line);
 	if (i != map->width)
 		return (error_exit("Map size incorrect"));
-	return (get_next_line(fd));
+	line = get_next_line(fd);
+	if (!line)
+		error_exit("lol");
+	return (line);
 }
 
 void	check_map_properties(t_map *map)
@@ -58,7 +70,7 @@ void	check_map_properties(t_map *map)
 		error_exit_free("There must be at least one object", map);
 }
 
-char	*check_char(char *line, t_map *map, int fd)
+void	check_char(char *line, t_map *map, int fd)
 {
 	size_t	i;
 
@@ -77,14 +89,19 @@ char	*check_char(char *line, t_map *map, int fd)
 			else if (line[i] == 'C')
 				map->num_objs++;
 			else if (line[i] != '0' && line[i] != '1')
-				return (free(line), error_exit("Unrecognized character"));
+			{
+				free_map_struct(map);
+				read_addr(line);
+				free(line);
+				line = NULL;
+				error_exit("Unrecognized character");
+			}
 			++i;
 		}
 		free(line);
 		line = NULL;
 		line = check_size(map, fd, i, line);
 	}
-	return (0);
 }
 
 void	check_map(int fd, t_map *map)
@@ -95,6 +112,6 @@ void	check_map(int fd, t_map *map)
 	if (!line)
 		error_exit("The map is empty");
 	map->width = ft_strlen(line) - 1;
-
 	check_char(line, map, fd);
+	free(line);
 }

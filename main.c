@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 19:14:02 by darmarti          #+#    #+#             */
-/*   Updated: 2025/02/08 20:09:55 by dario            ###   ########.fr       */
+/*   Updated: 2025/02/10 21:44:39 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ void	init_structs(t_vars *vars, t_map *map, t_flood_data *data)
 {
 	vars->map = map;
 	vars->flood_data = data;
+	vars->player_img = NULL;
 	map->num_spawns = 0;
 	map->num_exits = 0;
 	map->num_objs = 0;
