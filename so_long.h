@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 19:13:51 by darmarti          #+#    #+#             */
-/*   Updated: 2025/02/18 18:32:03 by dario            ###   ########.fr       */
+/*   Updated: 2025/02/18 19:04:26 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,6 @@ typedef struct s_vector
 	size_t		y;
 }					t_vector;
 
-// main.c
-void		init_structs(t_vars *vars, t_map *map, t_flood_data *data);
-
 // game_manager.c
 void		start_game(t_vars *vars);
 void		create_player(t_vars *vars, size_t x, size_t y);
@@ -83,9 +80,9 @@ void		player_input_hook(mlx_key_data_t keydata, void *param);
 // file_check.c
 void		check_file_validity(int fd, char *arg, t_map *map);
 char		*check_file_extension(char *arg);
-void		check_walls(t_map *map);
 
 // map_checker.c
+void		check_walls(t_map *map);
 void		check_map_properties(t_map *map);
 void		check_map(int fd, t_map *map);
 

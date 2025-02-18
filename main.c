@@ -6,29 +6,25 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 19:14:02 by darmarti          #+#    #+#             */
-/*   Updated: 2025/02/10 21:44:39 by dario            ###   ########.fr       */
+/*   Updated: 2025/02/18 18:59:48 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	read_tiles(char **tiles)
+static void	init_structs(t_vars *vars, t_map *map, t_flood_data *data)
 {
-	size_t	i;
-	size_t	j;
-
-	i = 0;
-	while (tiles[i])
-	{
-		j = 0;
-		while (tiles[i][j])
-		{
-			ft_printf("%c", tiles[i][j]);
-			++j;
-		}
-		ft_printf("\n");
-		++i;
-	}
+	vars->map = map;
+	vars->flood_data = data;
+	vars->player_img = NULL;
+	map->num_spawns = 0;
+	map->num_exits = 0;
+	map->num_objs = 0;
+	map->width = 0;
+	map->height = 0;
+	map->tiles = NULL;
+	data->exit = false;
+	data->objects_count = 0;
 }
 
 int	main(int argc, char **argv)
@@ -58,19 +54,4 @@ int	main(int argc, char **argv)
 	else
 		error_exit("No argument introduced");
 	return (0);
-}
-
-void	init_structs(t_vars *vars, t_map *map, t_flood_data *data)
-{
-	vars->map = map;
-	vars->flood_data = data;
-	vars->player_img = NULL;
-	map->num_spawns = 0;
-	map->num_exits = 0;
-	map->num_objs = 0;
-	map->width = 0;
-	map->height = 0;
-	map->tiles = NULL;
-	data->exit = false;
-	data->objects_count = 0;
 }

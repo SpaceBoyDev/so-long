@@ -1,9 +1,9 @@
 # The name of the project
 NAME = so_long
-SCALE = 8
+SCALE = 6
 
 VAL = valgrind
-VALFLAGS = --leak-check=full --show-leak-kinds=all
+VALFLAGS = #--leak-check=full --show-leak-kinds=all
 
 # Makefile flags
 MAKEFLAGS += --no-print-directory
@@ -13,7 +13,7 @@ LIBFT_LIB = $(LIBFT)libft.a
 LIBMLX	:= ./MLX42
 LIBS	:= $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
 
-VALID_MAPS = maps/map1.ber maps/map2.ber
+VALID_MAPS = maps/map1.ber maps/map2.ber maps/map3.ber maps/map4.ber
 
 INVALID_MAPS = maps/invalid/empty.ber maps/invalid/no_collectibles.ber \
 	maps/invalid/no_exit.ber maps/invalid/no_extension maps/invalid/no_path_bonus.ber \
@@ -43,6 +43,16 @@ CIAN = \e[7;36m
 
 # The default target - builds the project
 all: $(NAME)
+
+play:
+	@for file in $(VALID_MAPS); do \
+	./$(NAME) $$file | grep "ERROR" > /dev/null; \
+	if [ $$? -eq 0 ]; then \
+		echo "$(RED)$$file: ERROR!$(COLOREND)"; \
+	else \
+		echo "$(GREEN)$$file: OK!$(COLOREND)"; \
+	fi \
+	done
 
 # A rule to build the project from the .o files
 $(NAME): $(LIBFT_LIB) libmlx $(OBJS)
@@ -135,7 +145,6 @@ norme:
 			echo "$(COLOREND)"; \
 		fi \
 	done
-
 
 # A special rule to tell make that these targets aren't files
 .PHONY: all fclean re clean run error

@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 21:32:09 by dario             #+#    #+#             */
-/*   Updated: 2025/02/08 20:29:30 by dario            ###   ########.fr       */
+/*   Updated: 2025/02/18 19:01:59 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,12 @@ void	collect_object(t_vars *vars, t_map *map, size_t x, size_t y)
 	++vars->player_objs;
 	vars->map->tiles[y][x] = '0';
 	image_to_window(vars->mlx, "./textures/ground.png", (t_vector){x, y}, 2);
-	ft_printf("Object collected!!\n");
+	ft_printf(GREEN"Object collected!!\n"RST);
 	ft_printf("You got %i/%i objects", vars->player_objs, vars->map->num_objs);
 	ft_printf("\n");
 	if (vars->player_objs >= vars->map->num_objs)
 	{
-		ft_printf("All objects collected!!\n");
+		ft_printf(GREEN"All objects collected!!\n"RST);
 		image_to_window(vars->mlx, end, (t_vector){map->end_x, map->end_y}, 2);
 	}
 }

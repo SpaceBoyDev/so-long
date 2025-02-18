@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 16:11:43 by dario             #+#    #+#             */
-/*   Updated: 2025/01/31 09:51:43 by dario            ###   ########.fr       */
+/*   Updated: 2025/02/18 19:07:21 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,24 +74,6 @@ char	**copy_map(char **map, int rows)
 	while (map[i])
 	{
 		new_map[i] = ft_strdup(map[i]);
-		i++;
-	}
-	new_map[i] = NULL;
-	return (new_map);
-}
-
-mlx_image_t	**create_image_map(t_map *map)
-{
-	mlx_image_t		**new_map;
-	size_t			i;
-
-	new_map = ft_calloc(map->height, sizeof(mlx_image_t *));
-	if (!new_map)
-		return (NULL);
-	i = 0;
-	while (i < map->height)
-	{
-		new_map[i] = ft_calloc(map->width, sizeof(mlx_image_t));
 		i++;
 	}
 	new_map[i] = NULL;

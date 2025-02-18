@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 19:20:31 by dario             #+#    #+#             */
-/*   Updated: 2025/02/18 18:36:03 by dario            ###   ########.fr       */
+/*   Updated: 2025/02/18 19:04:53 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	check_walls(t_map *map)
 	}
 }
 
-char	*check_size(t_map *map, int fd, size_t i, char *line)
+static char	*check_size(t_map *map, int fd, size_t i, char *line)
 {
 	if (i != map->width)
 	{
@@ -61,7 +61,7 @@ void	check_map_properties(t_map *map)
 		error_exit_free("There must be at least one object", map);
 }
 
-void	check_char(char *line, t_map *map, int fd)
+static void	check_char(char *line, t_map *map, int fd)
 {
 	size_t	i;
 
