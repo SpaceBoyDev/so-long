@@ -6,7 +6,7 @@ VAL = valgrind
 VALFLAGS = #--leak-check=full --show-leak-kinds=all
 
 # Makefile flags
-MAKEFLAGS += --no-print-directory
+MAKEFLAGS += #--no-print-directory
 MAP = ./maps/map.ber
 LIBFT = ./libft/
 LIBFT_LIB = $(LIBFT)libft.a
@@ -46,12 +46,7 @@ all: $(NAME)
 
 play:
 	@for file in $(VALID_MAPS); do \
-	./$(NAME) $$file | grep "ERROR" > /dev/null; \
-	if [ $$? -eq 0 ]; then \
-		echo "$(RED)$$file: ERROR!$(COLOREND)"; \
-	else \
-		echo "$(GREEN)$$file: OK!$(COLOREND)"; \
-	fi \
+		./$(NAME) $$file ; \
 	done
 
 # A rule to build the project from the .o files
@@ -112,14 +107,9 @@ testmaps:
 	@echo "$(CIAN)All maps tested$(COLOREND)"
 
 leaks: #no funciona del todo esto. da todo como "no leaks"
-	@echo "$(CIAN)Testing all invalid maps$(COLOREND)"
 	@for file in $(INVALID_MAPS); do \
-			$(VAL) $(VALFLAGS) ./$(NAME) $$file | grep "no leaks are possible" > /dev/null; \
-		if [ $$? -eq 0 ]; then \
-			echo "$(RED)$$file: leaks!$(COLOREND)"; \
-		else \
-			echo "$(GREEN)$$file: no leaks$(COLOREND)"; \
-		fi \
+		echo "$(CIAN)Checking leaks in $$file$(COLOREND)" ; \
+		$(VAL) $(VALFLAGS) ./$(NAME) $$file ; \
 	done
 
 norme:
