@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 19:29:51 by darmarti          #+#    #+#             */
-/*   Updated: 2025/01/09 19:36:15 by dario            ###   ########.fr       */
+/*   Updated: 2025/02/18 18:47:11 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,12 @@
 # include <unistd.h>
 # include "printf/ft_printf.h"
 # include "gnl/get_next_line.h"
+
+# define RST	"\033[0m"
+# define RED	"\033[1;31m"
+# define BLUE	"\033[1;34m"
+# define GREEN	"\033[1;32m"
+# define YELLOW	"\033[1;33m"
 
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
