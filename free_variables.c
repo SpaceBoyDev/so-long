@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 18:46:45 by dario             #+#    #+#             */
-/*   Updated: 2025/02/08 20:17:16 by dario            ###   ########.fr       */
+/*   Updated: 2025/02/18 18:36:19 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,15 @@ char	*free_map(char **map)
 	free(map);
 	map = NULL;
 	return (NULL);
+}
+
+void	free_gnl(char *line, int fd)
+{
+	while (line)
+	{
+		free(line);
+		line = get_next_line(fd);
+	}
+	free(line);
+	line = NULL;
 }

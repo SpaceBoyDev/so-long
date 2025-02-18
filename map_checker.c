@@ -3,24 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   map_checker.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: darmarti <darmarti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 19:20:31 by dario             #+#    #+#             */
-/*   Updated: 2025/02/17 19:41:54 by darmarti         ###   ########.fr       */
+/*   Updated: 2025/02/18 18:36:03 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-void	read_addr(char *string)
-{
-	int i = 0;
-	while (string[i])
-	{
-		ft_printf("\nDirección de %c es %p\n", string[i], &string[i]);
-		++i;
-	}
-}
 
 void	check_walls(t_map *map)
 {
@@ -51,10 +41,13 @@ void	check_walls(t_map *map)
 
 char	*check_size(t_map *map, int fd, size_t i, char *line)
 {
+	if (i != map->width)
+	{
+		free_gnl(line, fd);
+		return (error_exit("Map size incorrect"));
+	}
 	if (line)
 		free(line);
-	if (i != map->width)
-		return (error_exit("Map size incorrect"));
 	return (get_next_line(fd));
 }
 
@@ -88,19 +81,11 @@ void	check_char(char *line, t_map *map, int fd)
 				map->num_objs++;
 			else if (line[i] != '0' && line[i] != '1')
 			{
-				while (line)
-				{
-					free(line);
-					line = get_next_line(fd);
-				}
-				free(line);
-				line = NULL;
+				free_gnl(line, fd);
 				error_exit("Unrecognized character");
 			}
 			++i;
 		}
-		free(line);
-		line = NULL;
 		line = check_size(map, fd, i, line);
 	}
 }
@@ -114,5 +99,4 @@ void	check_map(int fd, t_map *map)
 		error_exit("The map is empty");
 	map->width = ft_strlen(line) - 1;
 	check_char(line, map, fd);
-	free(line);
 }

@@ -6,7 +6,7 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 19:13:51 by darmarti          #+#    #+#             */
-/*   Updated: 2025/02/12 19:51:20 by dario            ###   ########.fr       */
+/*   Updated: 2025/02/18 18:32:03 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ void		flood_fill(char **map, t_flood_data *data, int x, int y);
 char		*free_vars(t_vars *vars);
 char		*free_map_struct(t_map *map);
 char		*free_map(char **map);
+void		free_gnl(char *line, int fd);
 
 // error_manager.c
 char		*error_exit(char *error_message);
