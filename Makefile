@@ -1,6 +1,6 @@
 # The name of the project
 NAME = so_long
-SCALE = 6
+SCALE = 4
 
 VAL = valgrind
 VALFLAGS = #--leak-check=full --show-leak-kinds=all
